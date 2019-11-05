@@ -17,7 +17,8 @@ const app = new Vue({
     everyFlat: false,
     // 显示或隐藏
     showFlatT: true,
-    showFlatF: true
+    showFlatF: true,
+    activeNum: 1
   },
   methods: {
     //   回车
@@ -64,16 +65,19 @@ const app = new Vue({
     all() {
       this.showFlatT = true;
       this.showFlatF = true;
+      this.activeNum = 1;
     },
     // 完成数据
     complete() {
       this.showFlatT = true;
       this.showFlatF = false;
+      this.activeNum = 3;
     },
     // 未完成
     active() {
       this.showFlatT = false;
       this.showFlatF = false;
+      this.activeNum = 2;
     },
     // 双击编辑
     editing(index) {

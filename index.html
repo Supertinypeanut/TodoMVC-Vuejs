@@ -52,13 +52,13 @@
       <!-- Remove this if you don't implement routing -->
       <ul class="filters">
         <li>
-          <a @click="all" class="selected" href="#/">All</a>
+          <a @click="all" :class="{selected:activeNum==1}" href="#/">All</a>
         </li>
         <li>
-          <a @click.prevent="active" href="#/active">Active</a>
+          <a @click.prevent="active" :class="{selected:activeNum==2}" href="#/active">Active</a>
         </li>
         <li>
-          <a @click.prevent="complete" href="#/completed">Completed</a>
+          <a @click.prevent="complete" :class="{selected:activeNum==3}" href="#/completed">Completed</a>
         </li>
       </ul>
       <!-- Hidden if no completed items are left ↓ -->
