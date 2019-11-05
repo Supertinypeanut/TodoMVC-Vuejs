@@ -86,6 +86,10 @@ const app = new Vue({
     // 编辑失去焦点
     blurEdit(index) {
       this.lists[index].editingFlat = false;
+    },
+    // 回车失去焦点
+    enterEdit() {
+      event.target.blur();
     }
   },
   computed: {
