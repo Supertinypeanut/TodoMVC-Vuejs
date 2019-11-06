@@ -29,10 +29,14 @@ const app = new Vue({
       this.txt = "";
     },
     // 改变
-    ckChange(index) {
+    ckChange() {
       // 改变自己是否显示的标志
+      // 使用节点操作
       //   event.target.checked ? event.target.parentNode.parentNode.classList.add("completed") : event.target.parentNode.parentNode.classList.remove("completed");
-      event.target.checked ? this.lists[index].flat = true : this.lists[index].flat = false;
+      // 获取checked值操作
+      // event.target.checked ? this.lists[index].flat = true : this.lists[index].flat = false;
+
+      /*节点使用v-model绑定lists[index].flat以上操作都不需要*/
       // 将全选显示按钮关闭
       this.everyFlat = false;
     },
@@ -91,7 +95,7 @@ const app = new Vue({
       event.target.blur();
     },
     // esc退出编辑
-    escEdit(event,index) {
+    escEdit(event, index) {
       this.lists[index].msg = this.saveTxt;
       event.target.blur();
     }
