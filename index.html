@@ -38,7 +38,7 @@
 				  <label @dblclick="editing(index)">{{item.msg}}</label>
 				  <button @click="del(index)" class="destroy"></button>
 				</div>
-				<input @blur="blurEdit(index)" @keyup.enter="enterEdit" class="edit" v-if="item.editingFlat" v-focus v-model="item.msg" >
+				<input @blur="blurEdit(index)" @keyup.enter="enterEdit($event)" @keyup.esc="escEdit($event,index)" class="edit" v-if="item.editingFlat" v-focus v-model="item.msg" >
 			  </li>
     </template>
 

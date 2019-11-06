@@ -7,6 +7,8 @@ const app = new Vue({
   data: {
     //输入框数据
     txt: "",
+    // 保存首次进入编辑模式的txt数据
+    saveTxt: "",
     //本地获取每条数据所有信息,flag标记是否显示  -->数据持久化
     lists: localStorage.getItem('lists') ? JSON.parse(localStorage.getItem('lists')) : [],
     // 全选
@@ -77,6 +79,7 @@ const app = new Vue({
     },
     // 双击编辑
     editing(index) {
+      this.saveTxt = this.lists[index].msg;
       this.lists[index].editingFlat = true;
     },
     // 编辑失去焦点
@@ -84,7 +87,12 @@ const app = new Vue({
       this.lists[index].editingFlat = false;
     },
     // 回车失去焦点
-    enterEdit() {
+    enterEdit(event) {
+      event.target.blur();
+    },
+    // esc退出编辑
+    escEdit(event,index) {
+      this.lists[index].msg = this.saveTxt;
       event.target.blur();
     }
   },
