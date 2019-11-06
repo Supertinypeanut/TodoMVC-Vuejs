@@ -32,37 +32,61 @@
 
 
         <template v-for="(item,index) in lists">
-			<li class="item" :class="{completed:item.flat,editing:item.editingFlat }"   v-show="showFlatT == item.flat||showFlatF">
-				<div class="view">
-				  <input @change="ckChange" class="toggle" type="checkbox" v-model="item.flat ">
-				  <label @dblclick="editing(index)">{{item.msg}}</label>
-				  <button @click="del(index)" class="destroy"></button>
-				</div>
-				<input @blur="blurEdit(index)" @keyup.enter="enterEdit($event)" @keyup.esc="escEdit($event,index)" class="edit" v-if="item.editingFlat" v-focus v-model="item.msg" >
-			  </li>
+        <li class="item" 
+          :class="{completed:item.flat,editing:item.editingFlat }"   
+          v-show="showFlatT == item.flat||showFlatF"
+          >
+          <div class="view">
+            <input 
+            @change="ckChange" 
+            class="toggle" type="checkbox" 
+            v-model="item.flat "
+            >
+            <label 
+              @dblclick="editing(index)"
+              >
+              {{item.msg}}</label>
+            <button 
+              @click="del(index)" class="destroy"
+            >
+            </button>
+          </div>
+          <input 
+            @blur="blurEdit(index)" 
+            @keyup.enter="enterEdit($event)" 
+            @keyup.esc="escEdit($event,index)" 
+            class="edit" 
+            v-if="item.editingFlat" 
+            v-focus 
+            v-model="item.msg" 
+            >
+          </li>
     </template>
 
 
       </ul>
     </section>
     <!-- This footer should hidden by default and shown when there are todos -->
-    <footer class="footer">
+    <footer class="footer" v-if="lists.length">
       <!-- This should be `0 items left` by default -->
       <span class="todo-count"><strong>{{num}}</strong> item left</span>
       <!-- Remove this if you don't implement routing -->
       <ul class="filters">
         <li>
-          <a @click="all" :class="{selected:activeNum==1}" href="#/">All</a>
+          <a @click="all" :class="{selected:activeNum==1}" href="#/">
+            All</a>
         </li>
         <li>
           <a @click.prevent="active" :class="{selected:activeNum==2}" href="#/active">Active</a>
         </li>
         <li>
-          <a @click.prevent="complete" :class="{selected:activeNum==3}" href="#/completed">Completed</a>
+          <a @click.prevent="complete" :class="{selected:activeNum==3}" href="#/completed">
+            Completed</a>
         </li>
       </ul>
       <!-- Hidden if no completed items are left ↓ -->
-      <button @click="cls" v-show="clsShow" class="clear-completed">Clear completed</button>
+      <button @click="cls" v-show="clsShow" class="clear-completed">
+       Clear completed</button>
     </footer>
   </section>
   <footer class="info">

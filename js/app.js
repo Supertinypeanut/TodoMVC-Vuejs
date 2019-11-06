@@ -107,15 +107,18 @@ const app = new Vue({
     },
     // 清除按钮是否隐藏
     clsShow() {
-      return this.lists.some(item => item.flat == true);
+      return this.lists.some(item => item.flat);
     }
   },
   // 监听
   watch: {
     // 数据lists
-    lists() {
-      // 本地数据同步
-      localStorage.setItem("lists", JSON.stringify(this.lists));
+    lists: {
+      handler() {
+        // 本地数据同步
+        localStorage.setItem("lists", JSON.stringify(this.lists));
+      },
+      deep: true
     }
   },
   //使用钩子
