@@ -38,6 +38,10 @@ const app = new Vue({
 
       /*节点使用v-model绑定lists[index].flat以上操作都不需要*/
       // 将全选显示按钮关闭
+      if (!this.num) {
+        this.everyFlat = true;
+        return;
+      }
       this.everyFlat = false;
     },
     // 删除
@@ -48,7 +52,7 @@ const app = new Vue({
     everyShow() {
       // 解决当一个一个点选中时，再点全选失灵，需要点第二次才生效（原因：在单个操作是否选中时，全选按钮是关闭的false，此时点击令其变为true，可原本所有元素已经是true，所以点击时看不到效果，点击第二次时变为false，才看到效果）
 
-      this.num ? this.everyFlat = !this.everyFlat : this.everyFlat = false;
+      // this.num ? this.everyFlat = !this.everyFlat : this.everyFlat = false;
       // 同步所有标记
       this.lists.forEach(item => item.flat = this.everyFlat);
     },
@@ -103,7 +107,7 @@ const app = new Vue({
   computed: {
     // 未完成条数
     num() {
-      return this.lists.filter(item => item.flat == false).length;
+      return this.lists.filter(item => !item.flat).length;
     },
     // 清除按钮是否隐藏
     clsShow() {
