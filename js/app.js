@@ -1,18 +1,14 @@
+// 本地数据初始化，开启一次即可
+// loadData();
+
+// Vue所有逻辑
 const app = new Vue({
   el: '#app',
   data: {
     //输入框数据
     txt: "",
-    // 每条数据所有信息,flag标记是否显示
-    lists: [{
-      msg: "我是一条小数据",
-      flat: true,
-      editingFlat: false
-    }, {
-      msg: "我是第二条小数据",
-      flat: false,
-      editingFlat: false
-    }],
+    //本地获取每条数据所有信息,flag标记是否显示  -->数据持久化
+    lists: localStorage.getItem('lists') ? JSON.parse(localStorage.getItem('lists')) : [],
     // 全选
     everyFlat: false,
     // 显示或隐藏
@@ -102,6 +98,14 @@ const app = new Vue({
       return this.lists.some(item => item.flat == true);
     }
   },
+  // 监听
+  watch: {
+    // 数据lists
+    lists() {
+      // 本地数据同步
+      localStorage.setItem("lists", JSON.stringify(this.lists));
+    }
+  },
   //使用钩子
   directives: {
     focus: {
@@ -111,3 +115,16 @@ const app = new Vue({
     }
   }
 });
+
+// 本地数据函数
+function loadData() {
+  localStorage.setItem('lists', JSON.stringify([{
+    msg: "我是一条小数据",
+    flat: true,
+    editingFlat: false
+  }, {
+    msg: "我是第二条小数据",
+    flat: false,
+    editingFlat: false
+  }]));
+}
