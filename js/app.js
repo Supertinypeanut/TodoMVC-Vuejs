@@ -13,6 +13,7 @@ const app = new Vue({
     lists: JSON.parse(localStorage.getItem('lists')) || [],
     // 全选
     everyFlat: false,
+    // 数据列表如何显示标志
     activeNum: localStorage.getItem('activeNum') || 1
   },
   methods: {
@@ -64,23 +65,6 @@ const app = new Vue({
           index--;
         }
       }
-    },
-    // 所有数据
-    all() {
-      this.showFlatF = true;
-      this.activeNum = 1;
-    },
-    // 完成数据
-    complete() {
-      this.showFlatT = true;
-      this.showFlatF = false;
-      this.activeNum = 3;
-    },
-    // 未完成
-    active() {
-      this.showFlatT = false;
-      this.showFlatF = false;
-      this.activeNum = 2;
     },
     // 双击编辑
     editing(index) {

@@ -52,14 +52,14 @@
       <!-- Remove this if you don't implement routing -->
       <ul class="filters">
         <li>
-          <a @click="all" :class="{selected:activeNum==1}" href="#/">
+          <a @click="activeNum = 1 " :class="{selected:activeNum==1}" href="#/">
             All</a>
         </li>
         <li>
-          <a @click.prevent="active" :class="{selected:activeNum==2}" href="#/active">Active</a>
+          <a @click.prevent="activeNum = 2" :class="{selected:activeNum==2}" href="#/active">Active</a>
         </li>
         <li>
-          <a @click.prevent="complete" :class="{selected:activeNum==3}" href="#/completed">
+          <a @click.prevent="activeNum = 3" :class="{selected:activeNum==3}" href="#/completed">
             Completed</a>
         </li>
       </ul>
