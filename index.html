@@ -32,36 +32,15 @@
 
 
         <template v-for="(item,index) in lists">
-        <li class="item" 
-          :class="{completed:item.flat,editing:item.editingFlat }"   
-          v-show="showFlatT == item.flat||showFlatF"
-          >
+        <li class="item" :class="{completed:item.flat,editing:item.editingFlat }"  v-show="showFlatT == item.flat||showFlatF">
           <div class="view">
-            <input 
-            @change="ckChange" 
-            class="toggle" type="checkbox" 
-            v-model="item.flat "
-            >
-            <label 
-              @dblclick="editing(index)"
-              >
-              {{item.msg}}</label>
-            <button 
-              @click="del(index)" class="destroy"
-            >
-            </button>
+            <input @change="ckChange" class="toggle" type="checkbox" v-model="item.flat ">
+            <label @dblclick="editing(index)">{{item.msg}}</label>
+            <button @click="del(index)" class="destroy"></button>
           </div>
-          <input 
-            @blur="blurEdit(index)" 
-            @keyup.enter="enterEdit($event)" 
-            @keyup.esc="escEdit($event,index)" 
-            class="edit" 
-            v-if="item.editingFlat" 
-            v-focus 
-            v-model="item.msg" 
-            >
-          </li>
-    </template>
+          <input @blur="blurEdit(index)" @keyup.enter="enterEdit($event)" @keyup.esc="escEdit($event,index)" class="edit" v-if="item.editingFlat" v-focus v-model="item.msg" >
+        </li>
+      </template>
 
 
       </ul>

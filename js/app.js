@@ -10,13 +10,10 @@ const app = new Vue({
     // 保存首次进入编辑模式的txt数据
     saveTxt: "",
     //本地获取每条数据所有信息,flag标记是否显示  -->数据持久化
-    lists: localStorage.getItem('lists') ? JSON.parse(localStorage.getItem('lists')) : [],
+    lists: JSON.parse(localStorage.getItem('lists')) || [],
     // 全选
     everyFlat: false,
-    // 显示或隐藏
-    showFlatT: true,
-    showFlatF: true,
-    activeNum: 1
+    activeNum: localStorage.getItem('activeNum') || 1
   },
   methods: {
     //   回车
@@ -27,6 +24,7 @@ const app = new Vue({
       }
       this.lists.unshift({ msg: this.txt, flat: false, editingFlat: false });
       this.txt = "";
+      this.everyFlat = false;
     },
     // 改变
     ckChange() {
@@ -69,7 +67,6 @@ const app = new Vue({
     },
     // 所有数据
     all() {
-      this.showFlatT = true;
       this.showFlatF = true;
       this.activeNum = 1;
     },
@@ -112,6 +109,14 @@ const app = new Vue({
     // 清除按钮是否隐藏
     clsShow() {
       return this.lists.some(item => item.flat);
+    },
+    // 显示或隐藏
+    showFlatF() {
+      return this.activeNum == 1;
+    },
+    showFlatT() {
+      // this.activeNum == 3 返回true ，否则false
+      return this.activeNum == 3 || false;
     }
   },
   // 监听
@@ -119,10 +124,14 @@ const app = new Vue({
     // 数据lists
     lists: {
       handler() {
-        // 本地数据同步
+        // 本地数据同步--列表数据
         localStorage.setItem("lists", JSON.stringify(this.lists));
       },
       deep: true
+    },
+    activeNum() {
+      // 本地数据同步--保持上回展示列表
+      localStorage.setItem("activeNum", JSON.stringify(this.activeNum));
     }
   },
   //使用钩子
